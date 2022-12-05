@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 import './item-list.css';
