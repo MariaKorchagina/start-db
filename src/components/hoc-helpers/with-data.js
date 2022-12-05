@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
-const withData = (View, getData) => {
+
+//withData - получает данные и отображает состояние в правильном виде( если данные загружаются, то спиннер, если нет - то др компоненты)
+const withData = (View) => {
 
     return class extends Component {
         //  swapiService = new SwapiService;
@@ -14,7 +16,7 @@ const withData = (View, getData) => {
 
             // const { getData } = this.props;
             //  this.swapiService.getAllPeople()
-            getData()
+            this.props.getData()
                 .then((data) => {
                     this.setState({
                         data

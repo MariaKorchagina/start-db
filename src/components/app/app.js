@@ -7,15 +7,27 @@ import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page/people-page';
 import ItemList from '../item-list';
 import SwapiService from '../../services/swapi-service';
-import PersonDetails from '../person-details';
+// import PersonDetails from '../person-details';
 import ItemDetails from '../person-details';
 
 import Record from '../record';
 import Row from '../row';
+import { SwapiServiceProvider } from '../swapi-service-context';
+import DummySwapiService from '../../services/dummy-swapi-service'
+
+import {
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails,
+  PersonList,
+  PlanetList,
+  StarshipList
+} from '../sw-components';
+
 
 export default class App extends Component {
 
-  swapiService = new SwapiService();
+  swapiService = new DummySwapiService();
 
   state = {
     showRandomPlanet: true,
@@ -72,20 +84,37 @@ export default class App extends Component {
 
     return (
       <div className='stardb-app'>
-        <Header />
-        {/* {planet} */}
+        <SwapiServiceProvider value={this.swapiService}>
+          <Header />
+          {/* {planet} */}
+          <PersonDetails itemId={11} />
+          <PlanetDetails itemId={5} />
+          <StarshipDetails itemId={9} />
+          <PersonList />
+          {/* {({ name }) => <span>{name}</span>}
+        </PersonList> */}
 
-        <Row
-          left={personDetails}
-          right={starshipDetails} />
+          <StarshipList />
+          {/* {({ name }) => <span>{name}</span>}
+        </StarshipList> */}
 
-        {/* <div className='row mb2 button-row'>
+          <PlanetList />
+          {/* {({ name }) => <span>{name}</span>}
+        </PlanetList> */}
+
+          {/* <PersonDetails /> */}
+
+          <Row
+            left={personDetails}
+            right={starshipDetails} />
+
+          {/* <div className='row mb2 button-row'>
           <ErrorButton />
         </div> */}
 
-        {/* <PeoplePage /> */}
+          {/* <PeoplePage /> */}
 
-        {/* 
+          {/* 
         <div className='row mb2'>
           <div className='col-md-6'>
             <ItemList
@@ -111,6 +140,7 @@ export default class App extends Component {
             <PersonDetails personId={this.state.selectedPerson} />
           </div>
         </div> */}
+        </SwapiServiceProvider>
       </div>
     );
   };

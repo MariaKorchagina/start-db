@@ -14,3 +14,5 @@ const Record = ({ item, field, label }) => {
 };
 
 export default Record;
+
+//подкомпонент ItemDetails для того,чтобы сконфигурировать какие именно детали будет отображать ItemDetails
