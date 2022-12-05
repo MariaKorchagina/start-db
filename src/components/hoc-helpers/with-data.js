@@ -12,10 +12,18 @@ const withData = (View) => {
             data: null
         };
 
+        componentDidUpdate(prevProps) {
+            if (this.props.getData !== prevProps.getData) {
+                this.update();
+            }
+        }
         componentDidMount() {
-
             // const { getData } = this.props;
             //  this.swapiService.getAllPeople()
+            this.update();
+        }
+
+        update() {
             this.props.getData()
                 .then((data) => {
                     this.setState({
@@ -42,4 +50,3 @@ const withData = (View) => {
 export default withData;
 
 // withData - ф-ция для того,чтобы можно было выбрать какой именно компонент  будет заниматься отображением  данных
- 
