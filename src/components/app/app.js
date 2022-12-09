@@ -19,7 +19,7 @@ export default class App extends Component {
   //swapiService = new DummySwapiService(),
 
   state = {
-  //  showRandomPlanet: true,
+    //  showRandomPlanet: true,
     swapiService: new SwapiService(),
     hasError: false
   }
@@ -54,15 +54,15 @@ export default class App extends Component {
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
-   // const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
+    // const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
     return (
       <div className='stardb-app'>
         <SwapiServiceProvider value={this.state.swapiService}>
           <Header onServiceChange={this.onServiceChange} />
           {/* {planet} */}
-          <RandomPlanet/>
-
+          {/* <RandomPlanet updateInterval={2000} /> */}
+          <RandomPlanet />
 
           {/* {({ name }) => <span>{name}</span>}
         </PersonList> */}

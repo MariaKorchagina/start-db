@@ -5,6 +5,11 @@ import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 export default class RandomPlanet extends Component {
 
+  static defaultProps = {
+    updateInterval: 10000
+  }
+  // сработает когда св-в нет вообще или они представлены как undefined
+
   swapiService = new SwapiService();
 
   state = {
@@ -13,14 +18,16 @@ export default class RandomPlanet extends Component {
   };
 
   componentDidMount() {
+    const { updateInterval } = this.props;
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 2500)
+    // this.interval = setInterval(this.updatePlanet, 2500)
+    this.interval = setInterval(this.updatePlanet, updateInterval)
     // компонент создает ссылку на метод в setInterval и даже после того , как этот компонент пропадает эта ссылка не очищается, т.е. setInterval продолжает работать и обновлять планеты.
     //Перед тем , как кокмпонент будет удален , необходимо очистить ресурсы
-    // 
+
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     clearInterval(this.interval);
   }
 
@@ -67,6 +74,7 @@ export default class RandomPlanet extends Component {
     );
   }
 }
+
 
 const PlanetView = ({ planet }) => {
   const { id, name, population, rotationPeriod, diameter } = planet;
