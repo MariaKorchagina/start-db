@@ -3,12 +3,18 @@ import SwapiService from '../../services/swapi-service';
 import './random-planet.css';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
+import PropTypes from 'prop-types';
 export default class RandomPlanet extends Component {
 
   static defaultProps = {
     updateInterval: 10000
   }
   // сработает когда св-в нет вообще или они представлены как undefined
+
+  static propTypes = {
+    updateInterval: PropTypes.number
+  }
+  // позволяет проверить значения свойств props , к-е получает компонент
 
   swapiService = new SwapiService();
 

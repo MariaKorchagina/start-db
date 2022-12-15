@@ -3,6 +3,7 @@ import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 import './item-list.css';
 import { withData } from '../hoc-helpers';
+import PropTypes from 'prop-types';
 
 const ItemList = (props) => {
 
@@ -29,9 +30,17 @@ const ItemList = (props) => {
     );
 }
 
+ItemList.defaultProps = {
+    onItemSelected: () => { }
+}
 
-// const {getAllPeople} = new SwapiService();
+ItemList.propTypes = {
+    onItemSelected: PropTypes.func,
+    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    children: PropTypes.func.isRequired
+}
+const { getAllPeople } = new SwapiService();
 
-// export default withData(ItemList, getAllPeople);
+export default withData(ItemList, getAllPeople);
 
-export default ItemList;
+// export default ItemList;
