@@ -15,14 +15,10 @@ import Row from '../row';
 import { SwapiServiceProvider } from '../swapi-service-context';
 import DummySwapiService from '../../services/dummy-swapi-service'
 import { PeoplePage, PlanetPage, StarshipPage } from '../pages';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  Outlet,
-} from 'react-router-dom';
+import DynamicalStarshipsDetails from "../dynamical-starships-details";
+import { BrowserRouter, Routes, Route, } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import StarshipDetails from '../sw-components/starship-details';
 export default class App extends Component {
 
   //swapiService = new DummySwapiService(),
@@ -60,12 +56,10 @@ export default class App extends Component {
 
 
   render() {
-
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
     // const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
-
 
     return (
       <ErrorBoundry>
@@ -77,10 +71,10 @@ export default class App extends Component {
               <Routes>
                 <Route path="/" element={<h2>Welcome to Star Wars</h2>} />
 
-                <Route path="/" element={<h2>Welcome to Star Wars</h2>} />
                 <Route path="/people" element={<PeoplePage />} />
                 <Route path="/planets" element={<PlanetPage />} />
                 <Route path="/starships" element={<StarshipPage />} />
+                <Route path="/starships/:id" element={<DynamicalStarshipsDetails />} />
               </Routes>
             </div>
           </BrowserRouter>
@@ -89,17 +83,12 @@ export default class App extends Component {
 
       // {/* {planet} */}
       // {/* <RandomPlanet updateInterval={2000} /> */}
-
-
       // {/* {({ name }) => <span>{name}</span>}
       // </PersonList> */}
-
-
 
       // {/* <Row
       //     left={<PlanetList />}
       //     right={<PlanetDetails itemId={5} />} />
-
 
 
       //   {/* 
