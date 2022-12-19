@@ -14,7 +14,13 @@ import Record from '../record';
 import Row from '../row';
 import { SwapiServiceProvider } from '../swapi-service-context';
 import DummySwapiService from '../../services/dummy-swapi-service'
-import { PeoplePage, PlanetPage, StarshipPage } from '../pages';
+import {
+  PeoplePage,
+  PlanetPage,
+  StarshipPage,
+  LoginPage,
+  SecretPage
+} from '../pages';
 import DynamicalStarshipsDetails from "../dynamical-starships-details";
 import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import { useParams } from "react-router-dom";
@@ -26,8 +32,15 @@ export default class App extends Component {
   state = {
     //  showRandomPlanet: true,
     swapiService: new SwapiService(),
-    hasError: false
+    hasError: false,
+    isLoggedIn: false
   }
+
+  onLogin = () => {
+    this.setState({
+      isLoggedIn: true
+    });
+  };
 
   onServiceChange = () => {
     this.setState(({ swapiService }) => {
@@ -61,6 +74,7 @@ export default class App extends Component {
     }
     // const planet = this.state.showRandomPlanet ? <RandomPlanet /> : null;
 
+    const { isLoggedIn } = this.state;
     return (
       <ErrorBoundry>
         <SwapiServiceProvider value={this.state.swapiService}>
@@ -70,11 +84,13 @@ export default class App extends Component {
               <RandomPlanet />
               <Routes>
                 <Route path="/" element={<h2>Welcome to Star Wars</h2>} />
-
                 <Route path="/people" element={<PeoplePage />} />
+                <Route path="/people/:id" element={<PeoplePage />} />
                 <Route path="/planets" element={<PlanetPage />} />
                 <Route path="/starships" element={<StarshipPage />} />
                 <Route path="/starships/:id" element={<DynamicalStarshipsDetails />} />
+                <Route path="/login" element={<LoginPage isLoggedIn={isLoggedIn} onLogin={this.onLogin} />} />
+                <Route path="/secret" element={<SecretPage isLoggedIn={isLoggedIn} />} />
               </Routes>
             </div>
           </BrowserRouter>
