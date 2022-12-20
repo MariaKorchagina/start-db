@@ -22,7 +22,7 @@ import {
   SecretPage
 } from '../pages';
 import DynamicalStarshipsDetails from "../dynamical-starships-details";
-import { BrowserRouter, Routes, Route, } from 'react-router-dom';
+import { BrowserRouter, Routes, Route , Navigate} from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import StarshipDetails from '../sw-components/starship-details';
 export default class App extends Component {
@@ -82,20 +82,25 @@ export default class App extends Component {
             <div className='stardb-app'>
               <Header onServiceChange={this.onServiceChange} />
               <RandomPlanet />
-              <Routes>
-                <Route path="/" element={<h2>Welcome to Star Wars</h2>} />
-                <Route path="/people" element={<PeoplePage />} />
-                <Route path="/people/:id" element={<PeoplePage />} />
-                <Route path="/planets" element={<PlanetPage />} />
-                <Route path="/starships" element={<StarshipPage />} />
-                <Route path="/starships/:id" element={<DynamicalStarshipsDetails />} />
-                <Route path="/login" element={<LoginPage isLoggedIn={isLoggedIn} onLogin={this.onLogin} />} />
-                <Route path="/secret" element={<SecretPage isLoggedIn={isLoggedIn} />} />
-              </Routes>
+     
+                <Routes to="/">
+        
+                  <Route path="/" element={<h2>Welcome to Star Wars</h2>} />
+                  <Route path="/people" element={<PeoplePage />} />
+                  <Route path="/people/:id" element={<PeoplePage />} />
+                  <Route path="/planets" element={<PlanetPage />} />
+                  <Route path="/starships" element={<StarshipPage />} />
+                  <Route path="/starships/:id" element={<DynamicalStarshipsDetails />} />
+                  <Route path="/login" element={<LoginPage isLoggedIn={isLoggedIn} onLogin={this.onLogin} />} />
+                  <Route path="/secret" element={<SecretPage isLoggedIn={isLoggedIn} />} />
+                  <Route element={<h2>Page not found</h2>} />
+
+                </Routes>
+         
             </div>
           </BrowserRouter>
         </SwapiServiceProvider>
-      </ErrorBoundry>
+      </ErrorBoundry >
 
       // {/* {planet} */}
       // {/* <RandomPlanet updateInterval={2000} /> */}
